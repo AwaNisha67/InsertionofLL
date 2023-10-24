@@ -26,28 +26,37 @@ void insert(int value){
     }
 }
 void deleteatBeg(){
+
     if(start==NULL){
         printf("Empty");
+    return;
     }
+    
     temp = start;
     start=start->next;
     free(temp);
 }
 void deleteatEnd(){
+    
+    if(start==NULL){
+        printf("Empty");
+    return;
+    }
     ll *secondnode,*lastnode;
     lastnode=start;
     
-    while(lastnode != NULL){
+    while(lastnode->next != NULL){
         secondnode=lastnode;
         lastnode=lastnode->next;
     }
     if(lastnode == start){
         start=NULL;
-        free(lastnode);
+      
     }else{
         secondnode->next=NULL;
-        free(lastnode);
-    }
+     }
+       free(lastnode);
+    
 }
 void deleteatPos(){
     
@@ -96,13 +105,13 @@ void main(){
         printf("\nEnter the Position: ");
         scanf("%d",&pos);
         deleteatPos(pos);
-        break;
+        break;                    
         
         case 4:display();
         break;
         
         case 5:exit(1);
-        break;
+        break;    
         
         default:printf("\nInvalid Choice");
         break;
