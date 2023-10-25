@@ -58,8 +58,17 @@ void deleteatEnd(){
        free(lastnode);
     
 }
-void deleteatPos(){
-    
+void deleteatPos(int Pos){
+    int i=1;
+    temp=start;
+    while(i < Pos){
+        temp=temp->next;
+        i++;    
+    }
+    deletenode=temp->next;
+    temp->next=deletenode->next;
+    free(deletenode);
+    printf("Value has been deleted from %dth Pos\n",Pos);
 }
 void display(){
      temp=start;
@@ -102,7 +111,7 @@ void main(){
         break;
         
         case 3:
-        printf("\nEnter the Position: ");
+       printf("\nEnter the Position:(as startong from 0) ");
         scanf("%d",&pos);
         deleteatPos(pos);
         break;                    
