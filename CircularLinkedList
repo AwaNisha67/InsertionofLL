@@ -1,0 +1,114 @@
+//circular linked list
+#include<stdio.h>
+#include <stdlib.h>
+struct circularLinkedlist{
+    int data;
+    struct circularLinkedlist *next;
+};
+typedef struct circularLinkedlist Cll;
+Cll *start=NULL,*nn,*temp;
+int insertatBeg(int value){
+    
+    nn=(Cll*)malloc(sizeof(Cll));
+    nn->data=value;
+    nn->next=NULL;
+    
+    if( start == NULL){
+        start=nn;
+        start->next=nn;
+    }
+    else{
+        nn->next=start->next;
+        start->next=nn;
+    }
+    printf("1st Element of Cll %d",start->next->data);
+    
+}
+void insertatEnd(int value){
+    nn=(Cll*)malloc(sizeof(Cll));
+    nn->data=value;
+    nn->next=NULL;
+    if(start == NULL){
+        start=nn;
+        start->next=nn;
+    }
+    else{
+        nn->next=start->next;
+        start->next=nn;
+        start=nn;
+    }
+    printf("Value at end is %d",start->data);
+}
+void  insertatPos(int value,int pos){
+    nn=(Cll*)malloc(sizeof(Cll));
+    nn->data=value;
+    nn->next=NULL;
+    temp = start->next;
+    int i=1;
+    if(start == NULL){
+        insertatBeg(value);
+        return;
+    }else{
+         while(i<pos-1){
+            temp=temp->next;
+            i++;
+       }
+    nn->next=temp->next;
+    temp->next=nn;
+}
+printf("Value has been inserted on %dth Position",pos);
+}
+void display(){
+    temp=start->next;
+    if(start==NULL){
+        printf("List is empty");
+        return;
+    }
+    //do while not working properly
+    do{
+        printf("%d->",temp->data);
+        temp=temp->next;
+    }while(temp != start);
+     printf("%d->",temp->data);
+}
+void main(){
+int value,ch,pos;
+    printf("\nPress 1: Insert At Begginning");
+    printf("\nPress 2: Insert At End");
+    printf("\nPress 3: Insert At Partiular Position");
+    printf("\nPress 4: Display ");
+    printf("\nPress 5: Exit the code");
+    while(1){
+        printf("\nEnter Choice");
+        scanf("%d",&ch);
+        
+    switch(ch){
+        
+        case 1:printf("Enter Value");
+        scanf("%d",&value);
+        insertatBeg(value);
+        break;
+        
+        case 2:printf("Enter Value");
+        scanf("%d",&value);
+        insertatEnd(value);
+        break;
+        
+        case 3:printf("Enter Value");
+        scanf("%d",&value);
+        printf("\nEnter Position");
+        scanf("%d",&pos);
+        insertatPos(value,pos);
+        break;
+        
+        case 4:display();
+        break;
+        
+        case 5:printf("\nCode has been terminated");
+        exit(1);
+        break;
+        default:printf("\nInvalid Choice");
+    }    
+    }
+    
+}
